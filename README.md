@@ -15,7 +15,8 @@ Common library for using in Neovim plugins.
    - [User Input](#user-input)
 5. [Tables](#tables)
 6. [Colour](#colour)
-7. [License](#license)
+7. [Strings](#strings)
+8. [License](#license)
 
 ## Requirements
 
@@ -164,6 +165,14 @@ instance.
 | `hsv_to_rgb(h, s, v)`       |                             |
 | `rgb_to_hex(r, g, b)`       |                             |
 | `andi_colour(colour, text)` | Used for terminal colouring |
+
+## Strings
+
+`arshlib.strings` injects some methods into the `string` std module.
+
+| Method            |
+| :---------------- |
+| `title_case(str)` |
 
 ## License
 
