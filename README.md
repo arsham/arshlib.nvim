@@ -9,6 +9,8 @@ Common library for using in Neovim plugins.
 3. [Util](#util)
    - [dump](#dump)
    - [User Input](#user-input)
+4. [Tables](#tables)
+5. [License](#license)
 
 ## Requirements
 
@@ -57,6 +59,38 @@ util.user_input{
     end,
 }
 ```
+
+## Tables
+
+`arshlib.colour` module augments the internal `table` with new methods that can
+be chained. A `_t` is injected in the global space that can be used to create
+new `Table`s or convert a normal `table` to the type of `Table`. Methods that
+require a `Table` instance, if they receive a `table` instance, they will
+convert them automatically.
+
+If a return value is of `Table` type, the returned value is **always** a new
+instance.
+
+| Method             | Notes                                |
+| :----------------- | :----------------------------------- |
+| `filter(fn)`       |                                      |
+| `map(fn)`          |                                      |
+| `values()`         |                                      |
+| `map(fn)`          |                                      |
+| `values()`         |                                      |
+| `slice(f, l, s)`   | Slice with step                      |
+| `merge(other)`     |                                      |
+| `find_first(fn)`   |                                      |
+| `contains_fn(fn)`  |                                      |
+| `contains(string)` |                                      |
+| `reverse()`        |                                      |
+| `shuffle()`        |                                      |
+| `shunk(size)`      | Returns chunks of tables             |
+| `unique(fn)`       |                                      |
+| `sort(fn)`         |                                      |
+| `exec(fn)`         | Execute on the whole table           |
+| `when(bool)`       | Returns an empty Table if v is false |
+| `map_length()`     | includes the key-value pairs         |
 
 ## License
 
