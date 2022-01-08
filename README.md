@@ -16,7 +16,8 @@ Common library for using in Neovim plugins.
 5. [Tables](#tables)
 6. [Colour](#colour)
 7. [Strings](#strings)
-8. [License](#license)
+8. [FS](#fs)
+9. [License](#license)
 
 ## Requirements
 
@@ -173,6 +174,14 @@ instance.
 | Method            |
 | :---------------- |
 | `title_case(str)` |
+
+## FS
+
+`arshlib.fs` provides some file-system functionalities.
+
+| Method                  | Notes                                |
+| :---------------------- | :----------------------------------- |
+| `file_module(filename)` | Returns module name and the filepath |
 
 ## License
 
