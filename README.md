@@ -17,7 +17,8 @@ Common library for using in Neovim plugins.
 6. [Colour](#colour)
 7. [Strings](#strings)
 8. [FS](#fs)
-9. [License](#license)
+9. [LSP](#lsp)
+10. [License](#license)
 
 ## Requirements
 
@@ -182,6 +183,23 @@ instance.
 | Method                  | Notes                                |
 | :---------------------- | :----------------------------------- |
 | `file_module(filename)` | Returns module name and the filepath |
+
+## LSP
+
+`arshlib.lsp` provides useful tools for interacting with LSP.
+
+| Method                            | Notes                                                             |
+| :-------------------------------- | :---------------------------------------------------------------- |
+| `is_lsp_attached()`               |                                                                   |
+| `has_lsp_capability(capability)`  | True if at least one of the LSP servers has the given capability. |
+| `get_diagnostics_count(severity)` |                                                                   |
+| `diagnostics_exist(severity)`     |                                                                   |
+| `diagnostic_errors()`             | Count                                                             |
+| `diagnostic_warnings()`           | Count                                                             |
+| `diagnostic_hints()`              | Count                                                             |
+| `diagnostic_info()`               | Count                                                             |
+| `go_mod_tidy(bufnr,`filename)     | Executes go.mod tidy.                                             |
+| `go_mod_check_upgrades(filename)` | Checks for dependency updates and adds to the quickfix list.      |
 
 ## License
 
