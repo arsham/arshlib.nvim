@@ -6,16 +6,21 @@ Common library for using in Neovim plugins.
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-3. [Util](#util)
+3. [Quick](#quick)
+   - [Normal](#normal)
+   - [Augroup and Autocmd](#augroup-and-autocmd)
+   - [Highlight](#highlight)
+4. [Util](#util)
    - [dump](#dump)
    - [User Input](#user-input)
-4. [Tables](#tables)
-5. [Colour](#colour)
-6. [License](#license)
+5. [Tables](#tables)
+6. [Colour](#colour)
+7. [License](#license)
 
 ## Requirements
 
-- [Neovim 0.6.0](https://github.com/neovim/neovim/releases/tag/v0.6.0)
+At the moment it works on the development release of Neovim, and will be
+officially supporting [Neovim 0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0).
 
 ## Installation
 
@@ -33,6 +38,61 @@ use({
   "arsham/arshlib.nvim",
   requires = { "nvim.lua", "plenary.nvim", "nui.nvim" },
 })
+```
+
+## Quick
+
+`arshlib.quick` provides quick shortcuts for commonly used Neovim functions.
+
+| Method                               | Notes                                        |
+| :----------------------------------- | :------------------------------------------- |
+| `normal(mode, motion)`               | Execute a command in normal mode             |
+| `call_and_centre(fn)`                | Centre the cursor after calling fn           |
+| `cmd_and_centre(cmd)`                | Centre the cursor after executing Ex command |
+| `command(name, comand, opts)`        | Shortcut for `nvim_add_user_command`         |
+| `buffer_command(name, comand, opts)` | Shortcut for `nvim_buf_add_user_command`     |
+| `augroup(opts)`                      | Create augroups (See below)                  |
+| `autocmd(opts)`                      | Create autocmd (See below)                   |
+| `highlight(group, opts)`             | Create highlight groups (See below)          |
+
+### Normal
+
+Executes a normal command. For example:
+
+```lua
+quick.normal('n', 'y2k')
+```
+
+See `:h feedkeys()` for values of the mode.
+
+### Augroup and Autocmd
+
+```lua
+quick.augroup{"SOME_AUTOMATION", {
+    {"BufReadPost", "*", function()
+        vim.notify("This just happened!", vim.lsp.log_levels.INFO)
+    end},
+    {"BufReadPost", buffer=true, run=":LspStop"},
+    {"BufReadPost", "*.go", docs="an example of nested autocmd", run=function()
+        vim.notify("Buffer is read", vim.lsp.log_levels.INFO)
+        quick.autocmd{"BufDelete", buffer=true, run=function()
+            vim.notify("Buffer deleted", vim.lsp.log_levels.INFO)
+        end}
+    end},
+}}
+
+-- Or on its own.
+quick.autocmd{"BufLeave", "*", function()
+    vim.notify("Don't do this though", vim.lsp.log_levels.INFO)
+end},
+```
+
+### Highlight
+
+Create `highlight` groups:
+
+```lua
+quick.highlight("LspReferenceRead",  {ctermbg=180, guibg='#43464F', style='bold'})
 ```
 
 ## Util
@@ -110,5 +170,5 @@ instance.
 Licensed under the MIT License. Check the [LICENSE](./LICENSE) file for details.
 
 <!--
-vim: foldlevel=3
+vim: foldlevel=1
 -->
