@@ -1,5 +1,6 @@
 # Arshlib.nvim
 
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/arsham/arshlib.nvim)
 ![License](https://img.shields.io/github/license/arsham/arshlib.nvim)
 
 Common library for using in Neovim plugins.
