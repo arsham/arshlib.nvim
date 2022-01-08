@@ -10,7 +10,8 @@ Common library for using in Neovim plugins.
    - [dump](#dump)
    - [User Input](#user-input)
 4. [Tables](#tables)
-5. [License](#license)
+5. [Colour](#colour)
+6. [License](#license)
 
 ## Requirements
 
@@ -91,6 +92,18 @@ instance.
 | `exec(fn)`         | Execute on the whole table           |
 | `when(bool)`       | Returns an empty Table if v is false |
 | `map_length()`     | includes the key-value pairs         |
+
+## Colour
+
+`arshlib.colour` module provides functionalities around colours.
+
+| Method                      | Notes                       |
+| :-------------------------- | :-------------------------- |
+| `hex_to_rgb(hex)`           |                             |
+| `rgb_to_hsv(r, g, b)`       |                             |
+| `hsv_to_rgb(h, s, v)`       |                             |
+| `rgb_to_hex(r, g, b)`       |                             |
+| `andi_colour(colour, text)` | Used for terminal colouring |
 
 ## License
 
