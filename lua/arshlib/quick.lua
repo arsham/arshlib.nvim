@@ -153,6 +153,7 @@ end --}}}
 
 ---@class HighlightOpt
 ---@field style string
+---@field link? string if defined, everything else is ignored
 ---@field guifg string
 ---@field guibg string
 ---@field guisp string
@@ -171,7 +172,13 @@ function M.highlight(group, opt) --{{{
     ["opt.guisp"] = { opt.guisp, "s", true },
     ["opt.ctermfg"] = { opt.ctermfg, "s", true },
     ["opt.ctermbg"] = { opt.ctermbg, "s", true },
+    ["opt.link"] = { opt.link, "s", true },
   })
+
+  if opt.link then
+    nvim.ex.highlight(table.concat({ "link", group, opt.link }, " "))
+    return
+  end
 
   local style = opt.style and "gui = " .. opt.style or "gui = NONE"
   local guifg = opt.guifg and "guifg = " .. opt.guifg or "guifg = NONE"
