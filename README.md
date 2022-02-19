@@ -48,16 +48,17 @@ use({
 
 `arshlib.quick` provides quick shortcuts for commonly used Neovim functions.
 
-| Method                               | Notes                                        |
-| :----------------------------------- | :------------------------------------------- |
-| `normal(mode, motion)`               | Execute a command in normal mode             |
-| `call_and_centre(fn)`                | Centre the cursor after calling fn           |
-| `cmd_and_centre(cmd)`                | Centre the cursor after executing Ex command |
-| `command(name, comand, opts)`        | Shortcut for `nvim_add_user_command`         |
-| `buffer_command(name, comand, opts)` | Shortcut for `nvim_buf_add_user_command`     |
-| `augroup(opts)`                      | Create augroups (See below)                  |
-| `autocmd(opts)`                      | Create autocmd (See below)                   |
-| `highlight(group, opts)`             | Create highlight groups (See below)          |
+| Method                               | Notes                                                |
+| :----------------------------------- | :--------------------------------------------------- |
+| `normal(mode, motion)`               | Execute a command in normal mode                     |
+| `call_and_centre(fn)`                | Centre the cursor after calling fn                   |
+| `cmd_and_centre(cmd)`                | Centre the cursor after executing Ex command         |
+| `command(name, comand, opts)`        | Shortcut for `nvim_add_user_command`                 |
+| `buffer_command(name, comand, opts)` | Shortcut for `nvim_buf_add_user_command`             |
+| `augroup(opts)`                      | Create augroups (See below)                          |
+| `autocmd(opts)`                      | Create autocmd (See below)                           |
+| `highlight(group, opts)`             | Create highlight groups (See below)                  |
+| `selection_contents()`               | Returns the contents of the visually selected region |
 
 ### Normal
 

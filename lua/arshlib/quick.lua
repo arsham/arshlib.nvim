@@ -199,6 +199,37 @@ function M.highlight(group, opt) --{{{
   nvim.ex.highlight(str)
 end --}}}
 
+---Returns the contents of the visually selected region.
+-- @return string
+M.selection_contents = function()
+  local mode = vim.api.nvim_get_mode().mode
+  local from = vim.fn.getpos("v")
+  local to = vim.fn.getcurpos()
+  if from[2] > to[2] then
+    from, to = to, from
+  end
+
+  if mode == "V" or mode == "CTRL-V" then
+    return vim.api.nvim_buf_get_lines(0, from[2] - 1, to[2], false)
+  end
+
+  -- if on the same line but from right to left
+  if from[2] == to[2] and from[3] > to[3] then
+    from, to = to, from
+  end
+
+  local num_lines = to[2] - from[2] + 1
+  local lines = vim.api.nvim_buf_get_lines(0, from[2] - 1, to[2], false)
+  lines[1] = string.sub(lines[1], from[3], -1)
+  if num_lines == 1 then
+    lines[num_lines] = string.sub(lines[num_lines], 1, to[3] - from[3] + 1)
+  else
+    lines[num_lines] = string.sub(lines[num_lines], 1, to[3])
+  end
+
+  return table.concat(lines, "\n")
+end
+
 return M
 
 -- vim: fdm=marker fdl=0
