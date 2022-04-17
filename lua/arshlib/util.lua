@@ -94,7 +94,7 @@ function M.user_input(opts) --{{{
   })
 
   input:mount()
-  input:map("i", "<esc>", input.input_props.on_close, { noremap = true })
+  input:map("i", "<esc>", input.input_props.on_close, {})
   local event = require("nui.utils.autocmd").event
 
   input:on(event.BufHidden, function()
