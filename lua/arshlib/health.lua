@@ -3,7 +3,7 @@ local health = require("health")
 
 local libs = {
   plenary = "nvim-lua/plenary.lua",
-  ["nui.nvim"] = "MunifTanjim/nui.nvim",
+  ["nui.input"] = "MunifTanjim/nui.nvim",
 }
 
 M.check = function()

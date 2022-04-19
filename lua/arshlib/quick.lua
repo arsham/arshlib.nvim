@@ -146,30 +146,34 @@ end --}}}
 -- @return string
 M.selection_contents = function()
   local mode = vim.api.nvim_get_mode().mode
-  local from = vim.fn.getpos("v")
-  local to = vim.fn.getcurpos()
-  if from[2] > to[2] then
-    from, to = to, from
-  end
-
-  if mode == "V" or mode == "CTRL-V" then
-    return vim.api.nvim_buf_get_lines(0, from[2] - 1, to[2], false)
-  end
-
-  -- if on the same line but from right to left
-  if from[2] == to[2] and from[3] > to[3] then
-    from, to = to, from
-  end
-
-  local num_lines = to[2] - from[2] + 1
-  local lines = vim.api.nvim_buf_get_lines(0, from[2] - 1, to[2], false)
-  lines[1] = string.sub(lines[1], from[3], -1)
-  if num_lines == 1 then
-    lines[num_lines] = string.sub(lines[num_lines], 1, to[3] - from[3] + 1)
+  local _, from_row, from_col, end_row, end_col
+  if mode == "v" or mode == "V" or mode == "" then
+    _, from_row, from_col, _ = unpack(vim.fn.getpos("."))
+    _, end_row, end_col, _ = unpack(vim.fn.getpos("v"))
+    if mode == "V" then
+      from_col, end_col = 0, 999
+    end
   else
-    lines[num_lines] = string.sub(lines[num_lines], 1, to[3])
+    -- Using the last visual position if not in visual mode.
+    _, from_row, from_col, _ = unpack(vim.fn.getpos("'<"))
+    _, end_row, end_col, _ = unpack(vim.fn.getpos("'>"))
   end
 
+  if end_row < from_row then
+    from_row, end_row = end_row, from_row
+  end
+  if end_col < from_col then
+    from_col, end_col = end_col, from_col
+  end
+
+  local lines = vim.fn.getline(from_row, end_row)
+  local num_lines = _t(lines):map_length()
+  if num_lines <= 0 then
+    return ""
+  end
+
+  lines[num_lines] = string.sub(lines[num_lines], 1, end_col)
+  lines[1] = string.sub(lines[1], from_col)
   return table.concat(lines, "\n")
 end
 
