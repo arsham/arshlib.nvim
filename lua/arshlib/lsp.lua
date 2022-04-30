@@ -13,7 +13,12 @@ end --}}}
 function M.has_lsp_capability(capability) --{{{
   local clients = vim.lsp.buf_get_clients(0)
   for _, client in pairs(clients) do
-    local capabilities = client.resolved_capabilities
+    local capabilities
+    if vim.fn.has("nvim-0.8") == 1 then
+      capabilities = client.server_capabilities
+    else
+      capabilities = client.resolved_capabilities
+    end
     if capabilities and capabilities[capability] then
       return true
     end

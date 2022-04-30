@@ -47,7 +47,7 @@ end --}}}
 ---Creates a command from provided specifics on current buffer.
 ---@param name string
 ---@param command string|function
----@param opts dict
+---@param opts? dict
 function M.buffer_command(name, command, opts) --{{{
   opts = opts or {}
   opts.force = true
