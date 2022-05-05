@@ -108,6 +108,15 @@ function Table:values() --{{{
   return ret
 end --}}}
 
+---Returns a new Table that contains only the keys of the table.
+function Table:keys() --{{{
+  local ret = _t()
+  for k, _ in pairs(self) do
+    ret:insert(k)
+  end
+  return ret
+end --}}}
+
 ---Returns parts of the table between first and last indices. It does not take
 -- the named keys into account.
 ---@param first number
