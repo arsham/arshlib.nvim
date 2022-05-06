@@ -120,8 +120,8 @@ describe("Table", function()
       assert.are.same(_t(), _t():keys())
     end)
 
-    it("returns keys; keys == values if there is no k,v pair", function()
-      assert.are.same(_t({ 2, 3, 7, 9 }):sort(), t:values():sort())
+    it("returns index if there's no k,v pairs", function()
+      assert.are.same(_t({ 1, 2, 3, 4 }):sort(), t:keys():sort())
     end)
   end)
 
