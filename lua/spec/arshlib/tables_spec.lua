@@ -102,6 +102,46 @@ describe("Table", function()
     end)
   end)
 
+  describe("keys", function()
+    local t = _t({ 2, 3, 7, 9 })
+    local original = vim.deepcopy(t)
+
+    before_each(function()
+      t = original
+    end)
+
+    it("returns new copy", function()
+      local got = t:keys()
+      table.insert(got, 777)
+      assert.are.same(t, original)
+    end)
+
+    it("returns empty for empty tables", function()
+      assert.are.same(_t(), _t():keys())
+    end)
+
+    it("returns keys; keys == values if there is no k,v pair", function()
+      assert.are.same(_t({ 2, 3, 7, 9 }):sort(), t:values():sort())
+    end)
+  end)
+
+  describe("keys and values", function()
+    local t = _t({ v4 = 33, v1 = 12, v0 = 88 })
+    local original = vim.deepcopy(t)
+
+    before_each(function()
+      t = original
+    end)
+
+    it("returns keys, not the table", function()
+      assert.are_not.same(_t({ v4 = 33, v1 = 12, v0 = 88 }):sort(), t:keys():sort())
+    end)
+
+    it("keys != values with k,v pair", function()
+      assert.are_not.same(_t({ v4 = 33, v1 = 12, v0 = 88 }):values():sort(), t:keys():sort())
+    end)
+  end)
+
   describe("slice", function()
     local t = _t({ 2, 3, a = 7, 9, b = 10, 11 })
     local original_len = #t
