@@ -1,0 +1,34 @@
+colour:
+  - lua/arshlib/colour.lua
+  - spec/arshlib/colour_spec.lua
+
+fs:
+  - lua/arshlib/fs.lua
+  - spec/arshlib/fs_spec.lua
+
+lsp:
+  - lua/arshlib/lsp.lua
+  - spec/arshlib/lsp_spec.lua
+
+quick:
+  - lua/arshlib/quick.lua
+  - spec/arshlib/quick_spec.lua
+
+string:
+  - lua/arshlib/string.lua
+  - spec/arshlib/string_spec.lua
+
+tables:
+  - lua/arshlib/tables.lua
+  - spec/arshlib/tables_spec.lua
+
+util:
+  - lua/arshlib/util.lua
+  - spec/arshlib/util_spec.lua
+
+test:
+  - spec/**/*
+
+ci:
+  - .github/*
+  - .github/**/*
