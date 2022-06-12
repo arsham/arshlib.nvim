@@ -37,7 +37,7 @@ end --}}}
 ---Creates a command from provided specifics.
 ---@param name string
 ---@param command string|function
----@param opts dict
+---@param opts? dict
 function M.command(name, command, opts) --{{{
   opts = opts or {}
   opts.force = true

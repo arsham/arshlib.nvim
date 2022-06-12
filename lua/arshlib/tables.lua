@@ -24,7 +24,7 @@ local Table = {}
 inherit(Table, { table })
 
 ---Creates a new Table from the given table.
----@param t table
+---@param t table?
 ---@return Table|table|tablelib
 Table.new = function(t) --{{{
   return setmetatable(t or {}, Table)
@@ -120,14 +120,14 @@ end --}}}
 ---Returns parts of the table between first and last indices. It does not take
 -- the named keys into account.
 ---@param first number
----@param last number
----@param step number the step between each index
+---@param last? number
+---@param step? number the step between each index
 function Table:slice(first, last, step) --{{{
   step = step or 1
   if step == 1 then
     return _t({ unpack(self, first, last) })
   end
-  local sliced = _t()
+  local sliced = _t({})
   local length = #self
   last = last or #self
   for i = first or 1, last or length, step do
