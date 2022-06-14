@@ -22,7 +22,8 @@ Common library for using in Neovim plugins.
 
 ## Requirements
 
-This library supports [Neovim 0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0).
+This library supports [Neovim
+0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0) or newer.
 
 ## Installation
 

@@ -1,4 +1,3 @@
-local nvim = require("nvim")
 local M = {}
 
 ---Returns true if a LSP server is attached to the current buffer.
@@ -140,7 +139,7 @@ function M.go_mod_check_upgrades(filename) --{{{
       }
       table.insert(cur_list, item)
       vim.fn.setqflist(cur_list)
-      nvim.ex.copen()
+      vim.api.nvim_command("copen")
     end
 
     vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
