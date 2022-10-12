@@ -23,7 +23,7 @@ Common library for using in Neovim plugins.
 ## Requirements
 
 This library supports [Neovim
-0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0) or newer.
+v0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0) and newer.
 
 ## Installation
 
@@ -37,8 +37,8 @@ Use your favourite package manager to install this library. Packer example:
 
 ```lua
 use({
-  "arsham/arshlib.nvim",
-  requires = { "plenary.nvim", "nui.nvim" },
+	"arsham/arshlib.nvim",
+	requires = { "plenary.nvim", "nui.nvim" },
 })
 ```
 
@@ -62,7 +62,7 @@ use({
 Executes a normal command. For example:
 
 ```lua
-quick.normal('n', 'y2k')
+quick.normal("n", "y2k")
 ```
 
 See `:h feedkeys()` for values of the mode.
@@ -107,12 +107,12 @@ state that can pretty-print any input.
 This launches a popup buffer for the input:
 
 ```lua
-util.user_input{
-    prompt = "Message: ",
-    on_submit = function(value)
-        print("Thank you for your note: " .. value)
-    end,
-}
+util.user_input({
+	prompt = "Message: ",
+	on_submit = function(value)
+		print("Thank you for your note: " .. value)
+	end,
+})
 ```
 
 ## Tables

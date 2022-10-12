@@ -7,8 +7,9 @@ end --}}}
 ---Executes a command in normal mode.
 ---@param mode string @see vim.api.nvim_feedkeys().
 ---@param motion string what you mean to do in normal mode.
-function M.normal(mode, motion) --{{{
-  local sequence = vim.api.nvim_replace_termcodes(motion, true, false, false)
+---@param special boolean? if provided and true replaces keycodes (<CR> to \r)
+function M.normal(mode, motion, special) --{{{
+  local sequence = vim.api.nvim_replace_termcodes(motion, true, false, special or false)
   vim.api.nvim_feedkeys(sequence, mode, true)
 end --}}}
 

@@ -33,7 +33,7 @@ function M.timeit(fn) --{{{
   local start = vim.loop.hrtime()
   fn()
   local msg = ("%fs"):format((vim.loop.hrtime() - start) / 1e6)
-  print(msg)
+  vim.notify(msg)
 end --}}}
 
 ---Dumps any values
