@@ -38,7 +38,7 @@ end --}}}
 ---Creates a command from provided specifics.
 ---@param name string
 ---@param command string|function
----@param opts? dict
+---@param opts? table
 function M.command(name, command, opts) --{{{
   opts = opts or {}
   opts.force = true
@@ -48,7 +48,7 @@ end --}}}
 ---Creates a command from provided specifics on current buffer.
 ---@param name string
 ---@param command string|function
----@param opts? dict
+---@param opts? table
 function M.buffer_command(name, command, opts) --{{{
   opts = opts or {}
   opts.force = true
@@ -68,10 +68,6 @@ end --}}}
 ---@field buffer?  boolean
 ---@field silent?  boolean
 ---@field once?    boolean adds ++once
-
----Creates a single autocmd. You most likely want to use it in a context of an
--- augroup.
----@param opts AutocmdOpt[]
 
 ---Creates an augroup with a set of autocmds.
 ---@param opts AugroupOpt

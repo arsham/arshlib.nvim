@@ -37,8 +37,8 @@ Use your favourite package manager to install this library. Packer example:
 
 ```lua
 use({
-	"arsham/arshlib.nvim",
-	requires = { "plenary.nvim", "nui.nvim" },
+  "arsham/arshlib.nvim",
+  requires = { "plenary.nvim", "nui.nvim" },
 })
 ```
 
@@ -108,10 +108,10 @@ This launches a popup buffer for the input:
 
 ```lua
 util.user_input({
-	prompt = "Message: ",
-	on_submit = function(value)
-		print("Thank you for your note: " .. value)
-	end,
+  prompt = "Message: ",
+  on_submit = function(value)
+    print("Thank you for your note: " .. value)
+  end,
 })
 ```
 
