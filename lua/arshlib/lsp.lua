@@ -3,14 +3,14 @@ local M = {}
 ---Returns true if a LSP server is attached to the current buffer.
 ---@return boolean
 function M.is_lsp_attached() --{{{
-  return next(vim.lsp.buf_get_clients(0)) ~= nil
+  return next(vim.lsp.get_active_clients({ bufnr = 0 })) ~= nil
 end --}}}
 
 ---Returns true if at least one of the LSP servers has the given capability.
 ---@param capability string
 ---@return boolean
 function M.has_lsp_capability(capability) --{{{
-  local clients = vim.lsp.buf_get_clients(0)
+  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
   for _, client in pairs(clients) do
     local capabilities
     if vim.fn.has("nvim-0.8") == 1 then
@@ -39,7 +39,7 @@ end --}}}
 ---@param severity string
 ---@return number
 function M.get_diagnostics_count(severity) --{{{
-  local active_clients = vim.lsp.buf_get_clients(0)
+  local active_clients = vim.lsp.get_active_clients({ bufnr = 0 })
   if not active_clients then
     return 0
   end
