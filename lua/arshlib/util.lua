@@ -6,7 +6,7 @@ local M = {
 ---Prints the time it takes to run the fn function if the vim.g.run_profiler is
 -- set to true.
 ---@param name string|function if a function, you can ignore the fn
----@param fn? function
+---@param fn function
 function M.profiler(name, fn) --{{{
   if type(name) == "function" then
     fn = name
@@ -34,14 +34,6 @@ function M.timeit(fn) --{{{
   fn()
   local msg = ("%fs"):format((vim.loop.hrtime() - start) / 1e6)
   vim.notify(msg)
-end --}}}
-
----Dumps any values
----@vararg any
--- selene: allow(global_usage)
-function _G.dump(...) --{{{
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(unpack(objects))
 end --}}}
 
 ---mkdir_home creates a new folder in $HOME if not exists.

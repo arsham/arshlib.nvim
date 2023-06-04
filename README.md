@@ -9,9 +9,7 @@ Common library for using in Neovim plugins.
 2. [Installation](#installation)
 3. [Quick](#quick)
    - [Normal](#normal)
-   - [Augroup and Autocmd](#augroup-and-autocmd)
 4. [Util](#util)
-   - [dump](#dump)
    - [User Input](#user-input)
 5. [Tables](#tables)
 6. [Colour](#colour)
@@ -24,6 +22,13 @@ Common library for using in Neovim plugins.
 
 This library supports [Neovim
 v0.7.0](https://github.com/neovim/neovim/releases/tag/v0.7.0) and newer.
+
+### Update
+
+Some functionalities such as creating augroup and autocmd have been provided by
+newer version of Neovim and are removed from this library. If you rely on these
+functionalities please pin this library to `86a8bbb` commit, or use the
+Neovim's equivalent.
 
 ## Installation
 
@@ -53,8 +58,6 @@ use({
 | `cmd_and_centre(cmd)`                | Centre the cursor after executing Ex command         |
 | `command(name, comand, opts)`        | Shortcut for `nvim_create_user_command`              |
 | `buffer_command(name, comand, opts)` | Shortcut for `nvim_buf_create_user_command`          |
-| `augroup(opts)`                      | Create augroups (See below)                          |
-| `autocmd(opts)`                      | Create autocmd (See below)                           |
 | `selection_contents()`               | Returns the contents of the visually selected region |
 
 ### Normal
@@ -67,28 +70,6 @@ quick.normal("n", "y2k")
 
 See `:h feedkeys()` for values of the mode.
 
-### Augroup and Autocmd
-
-```lua
-quick.augroup("SOME_AUTOMATION", {
-    { events = "BufReadPost", pattern = "*", callback = function()
-        vim.notify("This just happened!", vim.lsp.log_levels.INFO)
-    end},
-    { events = "BufReadPost", buffer = true, callback = ":LspStop"},
-    { events = "BufReadPost", pattern = "*.go", desc="an example of nested autocmd", callback = function()
-        vim.notify("Buffer is read", vim.lsp.log_levels.INFO)
-        quick.autocmd({ events = "BufDelete", buffer = true, callback = function()
-            vim.notify("Buffer deleted", vim.lsp.log_levels.INFO)
-        end})
-    end},
-})
-
--- Or on its own.
-quick.autocmd({ events = "BufLeave", pattern = "*", callback = function()
-    vim.notify("Don't do this though", vim.lsp.log_levels.INFO)
-end}),
-```
-
 ## Util
 
 In the following examples we assume the `util` is:
@@ -96,11 +77,6 @@ In the following examples we assume the `util` is:
 ```lua
 local util = require("arshlib.util")
 ```
-
-### Dump
-
-Upon requiring `arshlib.util`, a `dump` function is injected in the global
-state that can pretty-print any input.
 
 ### User Input
 
@@ -129,8 +105,6 @@ instance.
 | Method             | Notes                                |
 | :----------------- | :----------------------------------- |
 | `filter(fn)`       |                                      |
-| `map(fn)`          |                                      |
-| `values()`         |                                      |
 | `map(fn)`          |                                      |
 | `values()`         |                                      |
 | `slice(f, l, s)`   | Slice with step                      |
@@ -197,5 +171,5 @@ instance.
 Licensed under the MIT License. Check the [LICENSE](./LICENSE) file for details.
 
 <!--
-vim: foldlevel=1
+vim: fdl=1 cole=0
 -->
