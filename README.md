@@ -7,6 +7,8 @@ Common library for using in Neovim plugins.
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)
+   - [Packer](#packer)
+   - [Lazy](#lazy)
 3. [Quick](#quick)
    - [Normal](#normal)
 4. [Util](#util)
@@ -38,13 +40,30 @@ as dependencies in your package manager:
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 
-Use your favourite package manager to install this library. Packer example:
+Use your favourite package manager to install this library.
+
+### Packer
 
 ```lua
 use({
   "arsham/arshlib.nvim",
-  requires = { "plenary.nvim", "nui.nvim" },
+  requires = {
+    "MunifTanjim/nui.nvim",
+    "nvim-lua/plenary.nvim",
+  },
 })
+```
+
+### Lazy
+
+```lua
+{
+  "arsham/arshlib.nvim",
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+    "nvim-lua/plenary.nvim",
+  }
+}
 ```
 
 ## Quick
