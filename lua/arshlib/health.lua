@@ -1,5 +1,4 @@
 local M = {}
-local health = vim.health
 
 local libs = {
   plenary = "nvim-lua/plenary.lua",
@@ -7,14 +6,14 @@ local libs = {
 }
 
 M.check = function()
-  health.report_start("Arshlib Health Check")
+  vim.health.start("Arshlib Health Check")
   for name, package in pairs(libs) do
     if not pcall(require, name) then
-      health.report_error(package .. " was not found", {
+      vim.health.error(package .. " was not found", {
         'Please install "' .. package .. '"',
       })
     else
-      health.report_ok(package .. " is installed")
+      vim.health.ok(package .. " is installed")
     end
   end
 end
