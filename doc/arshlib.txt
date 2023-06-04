@@ -1,0 +1,229 @@
+arshlib.txt
+
+
+==============================================================================
+CONTENTS                                                    *arshlib-contents*
+
+1. Introduction ....................................... |arshlib-introduction|
+1. Requirements ....................................... |arshlib-requirements|
+2. Installation ....................................... |arshlib-installation|
+   - Packer .................................... |arshlib-installation-packer|
+   - Lazy ........................................ |arshlib-installation-lazy|
+3. Quick ..................................................... |arshlib-quick|
+   - Normal ................................................. |arshlib-normal|
+4. Util ....................................................... |arshlib-util|
+   - User Input ......................................... |arshlib-user_input|
+5. Tables ................................................... |arshlib-tables|
+6. Colour ................................................... |arshlib-colour|
+7. Strings ................................................. |arshlib-strings|
+8. FS ........................................................... |arshlib-fs|
+9. LSP ......................................................... |arshlib-lsp|
+10. License ................................................ |arshlib-license|
+
+==============================================================================
+INTRODUCTION                                            *arshlib-introduction*
+
+Common library for using in Neovim plugins.
+
+==============================================================================
+REQUIREMENTS                                            *arshlib-requirements*
+
+This library supports Neovim v0.9.0 and newer.
+
+==============================================================================
+INSTALLATION                                            *arshlib-installation*
+
+This library depends are the following libraries. Please make sure to add them
+as dependencies in your package manager:
+
+*   plenary.nvim <https://github.com/nvim-lua/plenary.nvim>
+*   nui.nvim <https://github.com/MunifTanjim/nui.nvim>
+
+Use your favourite package manager to install this library.
+
+------------------------------------------------------------------------------
+PACKER                                           *arshlib-installation-packer*
+
+>lua
+  use({
+    "arsham/arshlib.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+  })
+<
+
+------------------------------------------------------------------------------
+LAZY                                               *arshlib-installation-lazy*
+
+>lua
+  {
+    "arsham/arshlib.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+    }
+  }
+<
+
+==============================================================================
+QUICK                                                          *arshlib-quick*
+
+arshlib.quick provides quick shortcuts for commonly used Neovim functions.
+
+normal(mode, motion)                                          *arshlib_normal*
+                   Execute a command in normal mode             *quick-normal*
+call_and_centre(fn)                                  *arshlib_call_and_centre*
+                   Centre the cursor after calling fn  *quick_call_and_centre*
+cmd_and_centre(cmd)                                   *arshlib_cmd_and_centre*
+                   Centre the cursor after executing
+                    Ex command
+command(name, comand, opts)                                  *arshlib_command*
+                    Shortcut for nvim_create_user_command      *quick_command*
+buffer_command(name, comand, opts)                    *arshlib_buffer_command*
+                                                        *quick_buffer_command*
+                    Shortcut for nvim_buf_create_user_command
+selection_contents()                              *arshlib_selection_contents*
+                    Returns the contents of the     *quick_selection_contents*
+                    visually selected region
+
+------------------------------------------------------------------------------
+NORMAL                                                        *arshlib-normal*
+
+Executes a normal command. For example:
+>lua
+  quick.normal("n", "y2k")
+<
+
+See |feedkeys()| for values of the mode.
+
+==============================================================================
+UTIL                                                            *arshlib-util*
+
+In the following examples we assume the util is:
+>lua
+  local util = require("arshlib.util")
+<
+
+------------------------------------------------------------------------------
+USER INPUT                                                *arshlib-user_input*
+
+This launches a popup buffer for the input:
+>lua
+  util.user_input({
+    prompt = "Message: ",
+    on_submit = function(value)
+    print("Thank you for your note: " .. value)
+    end,
+  })
+<
+
+==============================================================================
+TABLES                                *arshlib-table-methods* *arshlib-tables*
+
+arshlib.colour module augments the internal table with new methods that can
+be chained. A *_t* is injected in the global space that can be used to create
+new Table or convert a normal table to the type of Table. Methods that
+require a Table instance, if they receive a table instance, they will
+convert them automatically.
+
+If a return value is of Table type, the returned value is always a new
+instance.
+
+filter(fn)                                     *arshlib_filter* *table_filter*
+map(fn)                                              *arshlib_map* *table_map*
+values()                                                      *arshlib_values*
+                                                                *table_values*
+slice(f, l, s)                                                 *arshlib_slice*
+                                                                 *table_slice*
+                 Slice with step
+merge(other)                                                   *arshlib_merge*
+                                                                 *table_merge*
+find_first(fn)                                            *arshlib_find_first*
+                                                            *table_find_first*
+contains_fn(fn)                                          *arshlib_contains_fn*
+                                                           *table_contains_fn*
+contains(string)                                            *arshlib_contains*
+                                                              *table_contains*
+reverse()                                                    *arshlib_reverse*
+                                                               *table_reverse*
+shuffle()                                                    *arshlib_shuffle*
+                                                               *table_shuffle*
+shunk(size)                                      *arshlib_shunk* *table_shunk*
+                 Returns chunks of tables
+unique(fn)                                                    *arshlib_unique*
+                                                                *table_unique*
+sort(fn)                                           *arshlib_sort* *table_sort*
+exec(fn)                                           *arshlib_exec* *table_exec*
+                 Execute on the whole table
+when(bool)                                         *arshlib_when* *table_when*
+                 Returns an empty Table if v is false
+map_length()                                              *arshlib_map_length*
+
+                 Includes the key-value pairs               *table_map_length*
+
+==============================================================================
+COLOUR                             *arshlib-colour-functions* *arshlib-colour*
+
+arshlib.colour module provides functionalities around colours.
+
+hex_to_rgb(hex)                       *arshlib-hex_to_rgb* *colour-hex_to_rgb*
+rgb_to_hsv(r, g, b)                   *arshlib-rgb_to_hsv* *colour-rgb_to_hsv*
+hsv_to_rgb(h, s, v)                   *arshlib-hsv_to_rgb* *colour-hsv_to_rgb*
+rgb_to_hex(r, g, b)                   *arshlib-rgb_to_hex* *colour-rgb_to_hex*
+andi_colour(colour, text)           *arshlib-andi_colour* *colour-andi_colour*
+                         Used for terminal colouring
+
+==============================================================================
+STRINGS                            *arshlib-string-methods*) *arshlib-strings*
+
+arshlib.strings injects some methods into the string std module.
+
+title_case(str)                      *arshlib-title_case* *strings-title_case*
+
+==============================================================================
+FS                                         *arshlib-fs-functions* *arshlib-fs*
+
+arshlib.fs provides some file-system functionalities.
+
+file_module(filename)                                 *arshlib-fs-file_module*
+                    Returns module name and the filepath      *fs-file_module*
+
+==============================================================================
+LSP                                      *arshlib-lsp-functions* *arshlib-lsp*
+
+arshlib.lsp provides useful tools for interacting with LSP.
+
+is_lsp_attached()                                *arshlib-lsp-is_lsp_attached*
+                                                         *lsp-is_lsp_attached*
+has_lsp_capability(capability)                *arshlib-lsp-has_lsp_capability*
+                                                      *lsp-has_lsp_capability*
+                        True if at least one of the
+                        LSP servers has the given capability.
+get_diagnostics_count(severity)            *arshlib-lsp-get_diagnostics_count*
+                                                   *lsp-get_diagnostics_count*
+diagnostics_exist(severity)                    *arshlib-lsp-diagnostics_exist*
+                                                       *lsp-diagnostics_exist*
+diagnostic_errors()     Count                  *arshlib-lsp-diagnostic_errors*
+                                                       *lsp-diagnostic_errors*
+diagnostic_warnings()   Count                *arshlib-lsp-diagnostic_warnings*
+                                                     *lsp-diagnostic_warnings*
+diagnostic_hints()      Count                   *arshlib-lsp-diagnostic_hints*
+                                                        *lsp-diagnostic_hints*
+diagnostic_info()       Count                    *arshlib-lsp-diagnostic_info*
+                                                         *lsp-diagnostic_info*
+go_mod_tidy(bufnr,filename)                          *arshlib-lsp-go_mod_tidy*
+                                                             *lsp-go_mod_tidy*
+                        Executes go.mod tidy.
+go_mod_check_upgrades(filename)            *arshlib-lsp-go_mod_check_upgrades*
+                                                   *lsp-go_mod_check_upgrades*
+                        Checks for dependency updates
+                        and adds to the quickfix list.
+
+==============================================================================
+LICENSE                                                      *arshlib-license*
+
+Licensed under the MIT License. Check the ./LICENSE file for details.
+
+vim:tw=78:ft=help
