@@ -36,6 +36,8 @@ arshlib-tables	arshlib.txt	/*arshlib-tables*
 arshlib-title_case	arshlib.txt	/*arshlib-title_case*
 arshlib-user_input	arshlib.txt	/*arshlib-user_input*
 arshlib-util	arshlib.txt	/*arshlib-util*
+arshlib.nvim	arshlib.txt	/*arshlib.nvim*
+arshlib.txt	arshlib.txt	/*arshlib.txt*
 arshlib_buffer_command	arshlib.txt	/*arshlib_buffer_command*
 arshlib_call_and_centre	arshlib.txt	/*arshlib_call_and_centre*
 arshlib_cmd_and_centre	arshlib.txt	/*arshlib_cmd_and_centre*
